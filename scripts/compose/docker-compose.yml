@@ -11,7 +11,5 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
       PGDATA: /tmp
-    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     volumes:
       - ./containers/postgres/data:/var/lib/postgresql/data
-      - ./containers/postgres/postgres.conf:/etc/postgresql/postgresql.conf
