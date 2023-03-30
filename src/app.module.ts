@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { typeOrmAsyncConfig } from './orm.config';
+import { HealthCheckController } from './healthCheck/HealthCheckController';
 import moduleImports from './modules';
 
 @Module({
@@ -10,5 +11,6 @@ import moduleImports from './modules';
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     ...moduleImports,
   ],
+  controllers: [HealthCheckController],
 })
 export class AppModule {}
