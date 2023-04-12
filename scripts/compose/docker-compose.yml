@@ -5,11 +5,13 @@ services:
     hostname: postgres
     image: postgres:14.6
     ports:
-      - '54322:5432'
+      - $DATABASE_PORT
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
       PGDATA: /tmp
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     volumes:
       - ./containers/postgres/data:/var/lib/postgresql/data
+      - ./containers/postgres/postgres.conf:/etc/postgresql/postgresql.conf
