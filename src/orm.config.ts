@@ -26,11 +26,10 @@ const ormConfig = {
   database: AppConfig.database.database,
   password: AppConfig.database.password,
   schema: AppConfig.database.schema,
-  entities: [join(__dirname, 'entities', '*.js')],
-  // migrations: [join(__dirname, 'migrations', '*.js')],
-  synchronize: false,
-  logging: true,
-  ...sslConfig
+  entities: [join(__dirname, "**", "*.entity.js")],
+  synchronize: AppConfig.database.synchronize,
+  logging: AppConfig.database.logging,
+  ...sslConfig,
 };
 
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
