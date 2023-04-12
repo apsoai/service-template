@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { typeOrmAsyncConfig } from './orm.config';
 import { HealthCheckController } from './healthCheck/HealthCheckController';
-import moduleImports from './modules';
+import moduleImports from './autogen';
 
 @Module({
   imports: [
