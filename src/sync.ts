@@ -1,18 +1,19 @@
 import { DataSource } from 'typeorm';
 import { join } from 'path';
+import AppConfig from './config';
 
 (async () => {
   console.log('Database config: \n');
   const db: any = {
-    type: 'postgres',
-    host: 'localhost',
-    port: 54322,
-    username: 'apso',
-    password: 'password',
-    database: 'apso',
-    schema: 'apso_test',
-    synchronize: true,
-    logging: 'all',
+    type: AppConfig.database.type as any,
+    host: AppConfig.database.host,
+    port: parseInt(AppConfig.database.port, 10),
+    username: AppConfig.database.username,
+    database: AppConfig.database.database,
+    password: AppConfig.database.password,
+    schema: AppConfig.database.schema,
+    synchronize: AppConfig.database.synchronize,
+    logging: AppConfig.database.logging,
     entities: [join(__dirname, 'entities', '*.ts')],
   };
   console.log(db);
