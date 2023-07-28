@@ -26,7 +26,7 @@ const ormConfig = {
   database: AppConfig.database.database,
   password: AppConfig.database.password,
   schema: AppConfig.database.schema,
-  entities: [join(__dirname, "**", "*.entity.js")],
+  entities: [join(__dirname, '**', '*.entity.js')],
   synchronize: AppConfig.database.synchronize,
   logging: AppConfig.database.logging,
   ...sslConfig,
