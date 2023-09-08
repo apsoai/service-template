@@ -31,9 +31,12 @@
     "db:rollback": "npm run typeorm -- migration:revert -d ./dist/orm.config.js"
   },
   "dependencies": {
+    "@apollo/server": "^4.9.3",
+    "@nestjs/apollo": "^12.0.7",
     "@nestjs/common": "^9.3.7",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.3.7",
+    "@nestjs/graphql": "^12.0.8",
     "@nestjs/platform-express": "^9.3.7",
     "@nestjs/swagger": "^6.2.1",
     "@nestjs/typeorm": "^9.0.1",
@@ -41,6 +44,8 @@
     "@nestjsx/crud-typeorm": "^5.0.0-alpha.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "graphql": "^16.8.0",
+    "graphql-scalars": "^1.22.2",
     "pg": "^8.9.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
