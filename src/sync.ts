@@ -14,7 +14,7 @@ import AppConfig from './config';
     schema: AppConfig.database.schema,
     synchronize: AppConfig.database.synchronize,
     logging: AppConfig.database.logging,
-    entities: [join(__dirname, 'entities', '*.ts')],
+    entities: [join(__dirname, '**','*.entity.ts')],
   };
   console.log(db);
   const PostgresDataSource = new DataSource(db);
