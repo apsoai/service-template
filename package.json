@@ -31,7 +31,7 @@
     "db:rollback": "npm run typeorm -- migration:revert -d ./dist/orm.config.js"
   },
   "dependencies": {
-    "@apollo/server": "^4.10.1",
+    "@apollo/server": "^4.10.2",
     "@nestjs-query/core": "^0.30.0",
     "@nestjs-query/query-graphql": "^0.30.0",
     "@nestjs-query/query-typeorm": "^0.30.0",
