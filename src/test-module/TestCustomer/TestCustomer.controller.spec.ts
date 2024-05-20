@@ -71,7 +71,7 @@ describe('TestCustomerController', () => {
     return expect(response).not.toEqual(null);
   });
 
-  it('should call CustomerController get method', async () => {
+  it('should get status of customers with id = 4', async () => {
     const response = await request(app.getHttpServer()).get(
       '/TestCustomers?fields=status&filter[0]=id%7C%7C$eq%7C%7C4',
     );
@@ -84,7 +84,7 @@ describe('TestCustomerController', () => {
     return expect(response).not.toEqual(null);
   });
 
-  it('should call CustomerController get method', async () => {
+  it('should get customers with join on facilities and select facility id and status', async () => {
     const response = await request(app.getHttpServer()).get(
       '/TestCustomers?fields=status&join[]=facilities%7C%7Cid,status',
     );
