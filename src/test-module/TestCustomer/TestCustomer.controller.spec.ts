@@ -4,37 +4,19 @@ import { TestCustomer } from './TestCustomer.entity';
 import { TestFacility } from '../TestFacility/TestFacility.entity';
 import { TestCustomerController } from './TestCustomer.controller';
 import { TestCustomerService } from './TestCustomer.service';
-import { CrudRequest } from '@nestjsx/crud';
 import { TypeORMMySqlTestingModule } from '../test-utils/TypeormTestingModule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { INestApplication } from '@nestjs/common';
-
-const baseRequest: CrudRequest = {
-  parsed: {
-    fields: [],
-    paramsFilter: [],
-    search: {},
-    filter: [],
-    or: [],
-    join: [],
-    sort: [],
-    authPersist: undefined,
-    limit: 10,
-    offset: 0,
-    page: 1,
-    cache: undefined,
-  },
-  options: {},
-};
+import { ConfigModule } from '@nestjs/config';
 
 describe('TestCustomerController', () => {
   let app: INestApplication;
   let controller: TestCustomerController;
-  let spyService: TestCustomerService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
+        ConfigModule.forRoot({ isGlobal: true }),
         TypeORMMySqlTestingModule([TestCustomer, TestFacility]),
         TypeOrmModule.forFeature([TestCustomer, TestFacility]),
       ],
@@ -44,7 +26,6 @@ describe('TestCustomerController', () => {
 
     app = module.createNestApplication();
     await app.init();
-    spyService = module.get<TestCustomerService>(TestCustomerService);
     controller = module.get<TestCustomerController>(TestCustomerController);
   });
 

@@ -29,7 +29,7 @@
     "db:migrate": "npm run typeorm -- migration:run -d ./dist/orm.config.js",
     "db:build-and-migrate": "npm run build && npm run db:run",
     "db:rollback": "npm run typeorm -- migration:revert -d ./dist/orm.config.js",
-    "seeds": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run --dataSource typeorm-data-source.ts"
+    "seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run --dataSource src/seeders/typeorm-data-source.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.10.1",
