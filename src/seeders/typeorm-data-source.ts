@@ -3,8 +3,8 @@ import { SeederOptions } from 'typeorm-extension';
 import 'dotenv/config';
 
 const devPGOptions = {
-  host: process.env.POSTGRES_DB_HOST || 'localhost',
-  port: parseInt(process.env.POSTGRES_DB_PORT) || 5432,
+  host: process.env.DATABASE_HOST || 'localhost',
+  port: parseInt(process.env.DATABASE_PORT) || 5432,
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
 };
@@ -12,7 +12,7 @@ const devPGOptions = {
 const prodPGOptions = { url: process.env.DATABASE_URL };
 
 let options: DataSourceOptions & SeederOptions = {
-  type: 'postgres', // IF you are using a different type of connector, please mention here explicitly.
+  type: 'postgres',
   database: process.env.DATABASE_NAME || 'test',
   entities: ['src/**/**/*.entity.{ts,js}'],
   migrations: ['src/migrations/*{.ts,.js}'],
@@ -27,5 +27,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const dataSource = new DataSource(options);
-// npm run typeorm:generate --name=UserAndUserRoles  Migration Script
 export default dataSource;

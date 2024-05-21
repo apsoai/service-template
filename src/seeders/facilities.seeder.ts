@@ -2,7 +2,7 @@ import { Seeder } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
 import { TestCustomer } from '../test-module/TestCustomer/TestCustomer.entity';
 import { InternalServerErrorException } from '@nestjs/common';
-import { FacilityData } from '../test-module/seeds/seed-data';
+import { FacilityData } from '../test-module//TestFacility/seeds/seed-data';
 import { TestFacility } from '../test-module/TestFacility/TestFacility.entity';
 
 export default class FacilitiesSeeder implements Seeder {
@@ -22,11 +22,11 @@ export default class FacilitiesSeeder implements Seeder {
         }
 
         await facilityRepository.save(updatedFacilities);
-
-        console.log(
-          '>>>>>>>>>>>>>>>>Facilities CREATED SUCCESSFULLY>>>>>>>>>>>>>>>>>>',
-        );
       }
+
+      console.log(
+        '>>>>>>>>>>>>>>>>Facilities CREATED SUCCESSFULLY>>>>>>>>>>>>>>>>>>',
+      );
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
