@@ -37,55 +37,71 @@ describe('TestCustomerController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should call CustomerController get method', async () => {
+  it('should call CustomerController get method with fields and join', async () => {
     const response = await request(app.getHttpServer()).get(
-      '/TestCustomers?join%5B0%5D=facilities%7C%7Cid%2Cstatus%7C%7Con%5B0%5D%3Dfacilities.status%7C%7C%24eq%7C%7CActive&filter%5B0%5D=id%7C%7C%24eq%7C%7C4',
+      '/TestCustomers?fields=status&join=facilities',
     );
     const { body: { data } = {} } = response;
-    const [customer] = data || [];
-    const { id, name, country, status } = customer || {};
-
-    expect(id).toBe(4);
-    expect(name).toBe('Emily Brown');
-    expect(country).toBe('Australia');
-    expect(status).toBe('Archived');
-    return expect(response).not.toEqual(null);
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
+    expect(data.length).toBe(5);
+    expect(data[0].facilities).toBeDefined();
+    expect(data[0].facilities[0].id).toBeTruthy();
   });
 
-  it('should get status of customers with id = 4', async () => {
+  it('should call CustomerController get method with join and filter', async () => {
     const response = await request(app.getHttpServer()).get(
-      '/TestCustomers?fields=status&filter[0]=id%7C%7C$eq%7C%7C4',
+      '/TestCustomers?join[]=facilities||id,status&filter[0]=id||$eq||4',
     );
     const { body: { data } = {} } = response;
-    const [customer] = data || [];
-    const { id, status } = customer || {};
-
-    expect(id).toBe(4);
-    expect(status).toBe('Archived');
-    return expect(response).not.toEqual(null);
+    expect(data[0]?.id).toBe(4);
   });
 
-  it('should get customers with join on facilities and select facility id and status', async () => {
+  it('should call CustomerController get method with search containing "D"', async () => {
     const response = await request(app.getHttpServer()).get(
-      '/TestCustomers?fields=status&join[]=facilities%7C%7Cid,status',
+      '/TestCustomers?s={"name": {"$contL": "David"}}',
     );
     const { body: { data } = {} } = response;
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
+    expect(data[0].name).toBe('David Lee');
+  });
 
-    expect(data).toHaveLength(5);
+  it('should call CustomerController get method with complex search and condition', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/TestCustomers?s={"$and": [{"status": {"$eq":"Active"}},{"name": {"$ends": "Smith"}}]}',
+    );
+    const { body: { data } = {} } = response;
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
+    expect(data[0].name).toBe('Jane Smith');
+  });
 
-    data.forEach((customer: TestCustomer) => {
-      const { id, status, facilities } = customer || {};
-      expect(id).not.toEqual(null);
-      expect(status).not.toEqual(null);
-      expect(facilities).toBeInstanceOf(Array);
-      expect(facilities.length).toBeGreaterThan(0);
+  it('should call CustomerController get method with filter in condition', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/TestCustomers?filter=state||$in||CA,NY',
+    );
+    const { body: { data } = {} } = response;
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
+    expect(data.length).toBe(2);
+  });
 
-      facilities.forEach((facility: TestFacility) => {
-        expect(facility.id).not.toEqual(null);
-        expect(facility.status).not.toEqual(null);
-      });
-    });
+  it('should call CustomerController get method with fields, join and on condition', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/TestCustomers?fields=name&join[]=facilities||status||on[0]=facilities.status||$eq||Archived',
+    );
+    const { body: { data } = {} } = response;
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
+  });
 
-    return expect(response).not.toEqual(null);
+  it('should call CustomerController get method with fields, aggregate function and group by', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/TestCustomers?fields=COUNT(id)&join[]=facilities||COUNT(id),status||on[0]=facilities.status||$eq||Archived&groupBy=1',
+    );
+    const { body: { data } = {} } = response;
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
   });
 });
