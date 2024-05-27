@@ -87,6 +87,16 @@ describe('TestCustomerController', () => {
     expect(data.length).toBe(2);
   });
 
+  it('should call CustomerController get method with given filter, fields and sort', async () => {
+    const response = await request(app.getHttpServer()).get(
+      '/TestCustomers?fields=name,status&filter=city||$eq||New York&sort=name,ASC&page=1&limit=5',
+    );
+    const { body: { data } = {} } = response;
+    expect(response.status).toBe(200);
+    expect(data).toBeDefined();
+    expect(data[0].name).toBe('John Doe');
+  });
+
   it('should call CustomerController get method with fields, join and on condition', async () => {
     const response = await request(app.getHttpServer()).get(
       '/TestCustomers?fields=name&join[]=facilities||status||on[0]=facilities.status||$eq||Archived',
