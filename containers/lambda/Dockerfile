@@ -15,7 +15,7 @@ COPY ./*.json .
 
 # Bundle app source
 
-RUN npm install -f 
+RUN npm install --production -f 
 
 # Run the build command which creates the production bundle
 RUN npm run build
