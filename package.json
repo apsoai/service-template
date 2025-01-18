@@ -29,6 +29,7 @@
     "db:migrate": "npm run typeorm -- migration:run -d ./dist/orm.config.js",
     "db:build-and-migrate": "npm run build && npm run db:run",
     "db:rollback": "npm run typeorm -- migration:revert -d ./dist/orm.config.js",
+    "cdk": "cdk",
     "seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run --dataSource src/seeders/typeorm-data-source.ts"
   },
   "dependencies": {
@@ -58,6 +59,7 @@
     "graphql-scalars": "^1.23.0",
     "graphql-subscriptions": "^2.0.0",
     "pg": "^8.11.3",
+    "pusher": "5.2.0",
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20",

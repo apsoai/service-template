@@ -1,16 +1,21 @@
 version: 0.2
 
+env:
+  parameter-store:
+    APSO_GIT_PAT: "/github/package/token"
+    API_BASE_URL: "/dev/apso-service-builder/api-url"
+
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 20
     commands:
-      - npm install
+      - npm install -f
 
   build:
     commands:
       - npm run build
-      - npx ts-node infra/build/index.ts
+      - npx ts-node --project ./tsconfig.build.json --prefer-ts-exts infra/build/index.ts
 artifacts:
   files:
     - "cdk.out/**/*"
