@@ -11,8 +11,8 @@ async function bootstrap() {
     .setTitle('{ApplicationName}')
     .setVersion('1.0')
     .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('_docs', app, document);
+  // const document = SwaggerModule.createDocument(app, options);
+  // SwaggerModule.setup('_docs', app, document);
 
   await app.listen(process.env.APP_PORT || 3000);
 }
