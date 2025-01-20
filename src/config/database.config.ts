@@ -9,6 +9,7 @@ export const database: DataSourceOptions = {
   password: config.DATABASE_PASSWORD,
   database: config.DATABASE_NAME,
   schema: config.DATABASE_SCHEMA,
-  synchronize: config.DATABASE_SYNC,
+  // Environment Variables store as a string but this prop expects a boolean value.
+  synchronize: /^true$/i.test(config.DATABASE_SYNC),
   logging: config.DATABASE_LOGGING,
 };
