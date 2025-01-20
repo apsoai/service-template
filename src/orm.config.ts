@@ -27,6 +27,7 @@ const ormConfig = {
   password: AppConfig.database.password,
   schema: AppConfig.database.schema,
   entities: [join(__dirname, '**', '*.entity.js')],
+  migrations: [join(__dirname, '**', 'migrations/*-migration.js')],
   synchronize: AppConfig.database.synchronize,
   logging: AppConfig.database.logging,
   ...sslConfig,
@@ -36,6 +37,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   inject: [ConfigService],
   useFactory: async (): Promise<TypeOrmModuleOptions> => {
+    console.log('ORM CONFIG', ormConfig);
     return ormConfig;
   },
 };
