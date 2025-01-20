@@ -22,7 +22,7 @@ export interface EnvConfigOptions {
   DATABASE_PASSWORD: string;
   DATABASE_NAME: string;
   DATABASE_SCHEMA: string;
-  DATABASE_SYNC: boolean;
+  DATABASE_SYNC: string;
   DATABASE_LOGGING:
     | boolean
     | 'all'
@@ -54,7 +54,7 @@ const defaultConfig: EnvConfigOptions = {
   DATABASE_PASSWORD: 'password',
   DATABASE_NAME: 'apso',
   DATABASE_SCHEMA: 'apso_test',
-  DATABASE_SYNC: true,
+  DATABASE_SYNC: 'false',
   DATABASE_LOGGING: 'all',
   ENV: 'local',
   STRIPE_CHECKOUT_CANCEL_URL: '',
