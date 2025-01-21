@@ -1,6 +1,4 @@
 version: 0.2
-
-<<<<<<< HEAD
 env:
   parameter-store:
     APSO_GIT_PAT: "/github/package/token"
@@ -12,23 +10,11 @@ phases:
       nodejs: 20
     commands:
       - npm install -f
-=======
-phases:
-  install:
-    runtime-versions:
-      nodejs: 18
-    commands:
-      - npm install
->>>>>>> 788d44b (adding build process to template)
 
   build:
     commands:
       - npm run build
-<<<<<<< HEAD
       - npx ts-node --project ./tsconfig.build.json --prefer-ts-exts infra/build/index.ts
-=======
-      - npx ts-node infra/build/index.ts
->>>>>>> 788d44b (adding build process to template)
 artifacts:
   files:
     - "cdk.out/**/*"
