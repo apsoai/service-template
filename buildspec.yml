@@ -1,20 +1,41 @@
 version: 0.2
+
 env:
+  variables:
+    TEST: "test"
   parameter-store:
     APSO_GIT_PAT: "/github/package/token"
-    API_BASE_URL: "/dev/apso-service-builder/api-url"
 
 phases:
   install:
     runtime-versions:
       nodejs: 20
     commands:
-      - npm install -f
+      - |
+        echo "@mavric:registry=https://npm.pkg.github.com
+        //npm.pkg.github.com/:_authToken=\${APSO_GIT_PAT}
+        save-exact=true" > .npmrc
+      - npm ci
+
+  pre_build:
+    commands:
+      # Configure git to use the PAT
+      - git config --global url."https://${APSO_GIT_PAT}@github.com".insteadOf "https://github.com"
+      # Shallow clone the infra repo
+      - git clone --depth 1 https://github.com/mavric/apso-service-infra.git infra
+      # Copy required configuration files
+      - cp infra/cdk.json ./
+      - cp infra/tsconfig.build.json ./
+      # Run the dependencies installation script
+      - chmod +x infra/install-dependencies.sh
+      - ./infra/install-dependencies.sh
 
   build:
     commands:
       - npm run build
+      # Run the build script
       - npx ts-node --project ./tsconfig.build.json --prefer-ts-exts infra/build/index.ts
+
 artifacts:
   files:
     - "cdk.out/**/*"
