@@ -33,7 +33,7 @@
     "seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run --dataSource src/seeders/typeorm-data-source.ts"
   },
   "dependencies": {
-    "@apollo/server": "^4.10.0",
+    "@apollo/server": "^4.12.0",
     "@nestjs/apollo": "^12.0.11",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
