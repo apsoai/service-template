@@ -1,73 +1,171 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# APSO Service Template
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A production-ready NestJS service template used by the APSO CLI to scaffold new microservices. This template provides a solid foundation for building scalable, maintainable, and well-structured microservices following Domain-Driven Design principles.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 🚀 NestJS-based microservice architecture
+- 🔄 Dual API support (REST & GraphQL)
+- 📦 TypeORM integration with PostgreSQL
+- 🔐 Built-in authentication and authorization
+- 🎯 Health check endpoints
+- 🧪 Comprehensive testing setup
+- 📊 OpenAPI/Swagger documentation
+- 🐳 Docker and docker-compose support
+- ☁️ AWS Lambda deployment ready
+- 🌱 Database seeding support
+- 🔄 Automatic migration management
 
-## Installation
+## Getting Started
 
-```bash
-$ npm install
-```
+### Prerequisites
 
-## Running the app
+- Node.js (version specified in .nvmrc)
+- npm or yarn
+- Docker and docker-compose (for local development)
+- PostgreSQL
+
+### Installation
+
+1. This template is typically used via the APSO CLI. However, you can also use it directly:
 
 ```bash
-# development
-$ npm run start
+# Clone the repository
+git clone https://github.com/[YOUR_ORG_OR_USERNAME]/apso-service-template
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# Install dependencies
+npm install
 ```
 
-## Test
+2. Set up your environment variables:
 
 ```bash
-# unit tests
-$ npm run test
+# Copy the example environment file
+cp .env.example .env.local
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# Edit the file with your configuration
+nano .env.local
 ```
 
-## Support
+### Development
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# Start the development server
+npm run start:dev
 
-## Stay in touch
+# Run in watch mode
+npm run start:dev
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Build for production
+npm run build
+
+# Run production build
+npm run start:prod
+```
+
+### Database Management
+
+```bash
+# Create a new migration
+npm run db:create --name=your-migration-name
+
+# Generate migrations from entity changes
+npm run db:generate
+
+# Run migrations
+npm run db:migrate
+
+# Rollback last migration
+npm run db:rollback
+
+# Seed the database
+npm run seed
+```
+
+### Testing
+
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+```
+
+### Docker Support
+
+```bash
+# Start the development environment
+npm run compose
+
+# View logs
+npm run log
+
+# Shut down containers
+npm run shutdown
+```
+
+## Project Structure
+
+```
+src/
+├── config/           # Configuration modules and constants
+├── migrations/       # Database migrations
+├── seeders/         # Database seeders
+├── test-module/     # Example module implementation
+├── utils/           # Shared utilities
+├── healthCheck/     # Health check endpoints
+├── autogen/         # Auto-generated code (if any)
+├── app.module.rest.ts    # REST API module configuration
+├── app.module.graphql.ts # GraphQL API module configuration
+├── main.ts          # Application entry point
+└── lambda.ts        # AWS Lambda handler
+```
+
+## API Documentation
+
+- REST API documentation is available at `/api` when running in development mode
+- GraphQL playground is available at `/graphql` when running in development mode
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+## Architecture Decisions
+
+This template follows Domain-Driven Design principles and SOLID patterns:
+
+- Clear separation of concerns
+- Modular architecture
+- Repository pattern for data access
+- Dependency injection
+- Configurable API layers (REST/GraphQL)
 
 ## License
 
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+For support, please:
+
+1. Check the project documentation
+2. Open an issue on the GitHub repository
+3. Contact the APSO team
+
+## Acknowledgments
+
+- Built on [NestJS](https://nestjs.com/)
+- Inspired by best practices in microservice architecture
+- Community contributions welcome!
