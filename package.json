@@ -46,7 +46,7 @@
     "@nestjs/typeorm": "^10.0.0",
     "@nestjs/websockets": "^10.0.0",
     "@nestjsx/crud": "4.5.0",
-    "@nestjsx/crud-request": "4.5.0",
+    "@nestjsx/crud-request": "4.6.2",
     "@nestjsx/crud-typeorm": "4.5.0",
     "@types/aws-lambda": "^8.10.147",
     "@vendia/serverless-express": "^4.12.6",
