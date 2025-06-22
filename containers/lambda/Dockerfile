@@ -1,35 +1,19 @@
 ###################
-# BUILD FOR LOCAL DEVELOPMENT
+# BUILD FOR PRODUCTION
+# This Dockerfile leverages a pre-built base image with all node_modules installed.
 ###################
-FROM --platform=linux/amd64 public.ecr.aws/lambda/nodejs:20
+FROM --platform=linux/amd64 041451437307.dkr.ecr.us-east-1.amazonaws.com/apso-lambda-base:latest
 
-# Copy application dependency manifests to the container image.
-# A wildcard is used to ensure copying both package.json AND package-lock.json (when available).
-# Copying this first prevents re-running npm install on every code change.
-ARG APSO_GIT_PAT
-ENV APSO_GIT_PAT=$APSO_GIT_PAT
-RUN env
+# The WORKDIR is set to /app in the base image.
 
-COPY package*.json ./
+# Copy application source code and config files.
+# The base image contains all dependencies from the template's package.json.
 COPY ./src ./src
 COPY ./*.json .
-COPY ./.npmrc ./.npmrc
 COPY ./.apsorc ./.apsorc
 
-# # Install app dependencies using the `npm ci` command instead of `npm install`
-# RUN npm ci
-
-# Bundle app source
-
-RUN npm install -f 
-# RUN pwd
-# RUN ls -lrt
-# RUN cat .npmrc
-# RUN npm install -f 
-
-# Run the build command which creates the production bundle
+# Run the build command to transpile TypeScript into JavaScript
 RUN npm run build
-
   
-# Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
+# Set the CMD to your handler, which references the compiled output
 CMD [ "dist/lambda.handler" ]
