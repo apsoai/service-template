@@ -15,7 +15,7 @@ export interface EnvConfigOptions {
   SESSION_SECRET: string;
   ACCESS_SECRET_TOKEN: string;
   REFRESH_SECRET_TOKEN: string;
-  DATABASE_TYPE: 'postgres' | 'mysql';
+  DATABASE_TYPE: 'postgres' | 'mysql' | 'pglite';
   DATABASE_HOST: string;
   DATABASE_PORT: number;
   DATABASE_USERNAME: string;

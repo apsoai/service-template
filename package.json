@@ -22,6 +22,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:integration": "jest --config ./test/jest-integration.json",
+    "test:compatibility": "jest --config ./test/jest-compatibility.json",
     "schema:sync": "ts-node ./src/sync.ts",
     "typeorm": "typeorm-ts-node-esm",
     "db:create": "npm run typeorm -- migration:create ./src/migrations/$npm_config_name",
@@ -62,7 +64,9 @@
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20",
-    "typeorm-extension": "^3.5.1"
+    "typeorm-extension": "^3.5.1",
+    "@electric-sql/pglite": "^0.3.14",
+    "typeorm-pglite": "^0.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
