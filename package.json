@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Nest TypeScript starter repository",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "nest build",
     "compose": "./scripts/apso-compose.sh",
