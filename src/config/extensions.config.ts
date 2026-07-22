@@ -6,10 +6,8 @@ export interface BillingConfig {
 }
 
 export const billing: BillingConfig = {
-  secretKey:
-    'STRIPE_SECRET_KEY_REDACTED',
-  publishKey:
-    'STRIPE_PUBLISH_KEY_REDACTED',
-  checkoutCancel: '',
-  checkoutSuccess: '',
+  secretKey: process.env.STRIPE_SECRET_KEY || '',
+  publishKey: process.env.STRIPE_PUBLISH_KEY || '',
+  checkoutCancel: process.env.STRIPE_CHECKOUT_CANCEL || '',
+  checkoutSuccess: process.env.STRIPE_CHECKOUT_SUCCESS || '',
 };
